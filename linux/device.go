@@ -1707,7 +1707,8 @@ func GetNvmeDeviceFromNamespace(serialOrNamespace string) (*model.Device, error)
             log.Tracef("serial path=%s", sysfsSerialPath)
             serial, err := util.FileReadFirstLine(sysfsSerialPath)
             if err != nil {
-				return nil, err
+				log.Warnf("Failed to extract serial from %s", f.Name())
+				continue
 			}
             // Normalize the serial from sysfs by removing dashes and whitespace
 	    // In nomarlizeSerial we remove "-" from serial 
